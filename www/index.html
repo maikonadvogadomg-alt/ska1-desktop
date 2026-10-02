@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
+  <meta name="theme-color" content="#0f1420">
+  <title>Mini SK</title>
+  <link rel="stylesheet" href="css/app.css">
+
+  <!-- PWA: Gerado pelo PWA Builder -->
+  <link rel="manifest" href="./manifest.json">
+  <meta name="theme-color" content="#1a1a2e">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="SKA1">
+  <link rel="apple-touch-icon" href="./icon-192.png">
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./service-worker.js')
+          .then(r => console.log('[PWA] Service Worker registrado!', r.scope))
+          .catch(e => console.error('[PWA] Erro:', e));
+      });
+    }
+  </script>
+</head>
+<body>
+  <header id="top">
+    <button class="icon-btn" id="btn-tree" title="Arquivos (Ctrl+B)" aria-label="Mostrar ou esconder arquivos">☰</button>
+    <button class="proj-name" id="proj-name" title="Trocar de projeto">Mini SK</button>
+    <span class="save-ind" id="save-ind" aria-live="polite"></span>
+    <nav class="top-tools" aria-label="Painéis">
+      <button class="icon-btn" data-open="search" title="Buscar no projeto (Ctrl+Shift+F)" aria-label="Buscar">🔍<span class="lbl">Buscar</span></button>
+      <button class="icon-btn" data-open="ai" title="IA (Ctrl+J)" aria-label="IA">🤖<span class="lbl">IA</span></button>
+      <button class="icon-btn" data-open="cp" title="Checkpoints (voltar)" aria-label="Checkpoints">📸<span class="lbl">Voltar</span></button>
+      <button class="icon-btn" data-open="gh" title="GitHub" aria-label="GitHub">🐙<span class="lbl">GitHub</span></button>
+      <button class="icon-btn" data-open="pwa" title="Ícones, instalar como app e Hub" aria-label="PWA">📱<span class="lbl">PWA</span></button>
+      <button class="icon-btn" data-open="proj" title="Projetos e configurações" aria-label="Projetos">🗂<span class="lbl">Projetos</span></button>
+    </nav>
+  </header>
+
+  <div id="main">
+    <aside id="tree-panel" aria-label="Arquivos"></aside>
+    <section id="center">
+      <div id="editor-area"></div>
+      <section id="preview-panel" aria-label="Preview"></section>
+    </section>
+    <aside id="side" aria-label="Painel">
+      <div class="panel-head"><b id="side-title"></b><button class="icon-btn" id="side-close" aria-label="Fechar painel" title="Fechar">✕</button></div>
+      <div id="side-body"></div>
+    </aside>
+    <div id="backdrop"></div>
+  </div>
+
+  <noscript><p style="padding:20px;color:#fff">O Mini SK precisa de JavaScript ligado.</p></noscript>
+
+  <!-- Ordem importa: cada módulo usa os anteriores. Sem bibliotecas externas. -->
+  <script src="js/00-core.js"></script>
+  <script src="js/10-fs.js"></script>
+  <script src="js/20-zip.js"></script>
+  <script src="js/30-highlight.js"></script>
+  <script src="js/40-editor.js"></script>
+  <script src="js/50-tree.js"></script>
+  <script src="js/60-preview.js"></script>
+  <script src="js/70-search.js"></script>
+  <script src="js/80-ai.js"></script>
+  <script src="js/85-checkpoints.js"></script>
+  <script src="js/90-github.js"></script>
+  <script src="js/95-pwa.js"></script>
+  <script src="js/99-app.js"></script>
+</body>
+</html>
